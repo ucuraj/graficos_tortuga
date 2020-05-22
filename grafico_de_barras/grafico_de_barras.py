@@ -1,5 +1,4 @@
 import turtle
-from time import sleep
 
 turtle.setup(width=.85, height=.75)  # configura el ancho y largo de la ventana con valores porcentuales.
 
@@ -158,7 +157,9 @@ def graficar(tortuga_graficar, lista_de_datos):
         tortuga_graficar.forward(100 - ancho_barra)
         tortuga_graficar.end_fill()
 
-    sleep(4)
+    screen = turtle.Screen()
+    screen.exitonclick()
+
 
 def graficar_lineas(tortuga_graficar_lineasPunteadas):
     for i in range(5):
@@ -173,3 +174,4 @@ def graficar_lineas(tortuga_graficar_lineasPunteadas):
 
 t = turtle.Turtle()
 cargar_datos_y_dibujar([40, 30, 60, 20, 70], color="red")
+
