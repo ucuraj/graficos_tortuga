@@ -7,16 +7,30 @@ def dibujar_grafico_barras(datos, color="red"):
     valores_y = []
     lista_de_datos = []
 
-    for i in range(len(datos)):
-        valores_x.append(str((i + 1) * 10))
-        valores_y.append(str((i + 1) * 10))
+    
+    exponente = obtener_exponente(datos)
+    
+    #Modifico los datos recibidos para que se grafiquen correctamente
     for i in datos:
-        lista_de_datos.append(str(i * 10))
+        lista_de_datos.append(i / (10 ** (exponente -2)))
+        
+    for i in range(len(datos)):
+        valores_x.append(str((i + 1) * (10)))
+        valores_y.append(str((i + 1) * (10 ** exponente)))
 
     ventana = turtle.Screen()
     configurar(valores_x, valores_y, lista_de_datos, color)
     ventana.exitonclick()
 
+
+def obtener_exponente(datos):
+    maximo = max(datos)
+    
+    valor = 0;
+    while (maximo > 10):
+        valor += 1
+        maximo = maximo / 10
+    return valor
 
 def configurar(valores_x, valores_y, lista_de_datos, color):
     """Esta función configura las tortugas y luego dibuja. Recibe una lista con los valores del eje X, una lista con
@@ -173,5 +187,3 @@ def graficar_lineas(tortuga_graficar_lineasPunteadas):
             tortuga_graficar_lineasPunteadas.up()
             tortuga_graficar_lineasPunteadas.forward(5)
 
-
-dibujar_grafico_barras([10,20,30,40,50])
