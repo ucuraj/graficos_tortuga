@@ -29,8 +29,6 @@ def dibujar_torta(pincel, radio, datos):
         pincel.setposition(posicion)
 
 
-# The labels
-
 def dibujar_etiquetas(pincel, radio, datos):
     """Esta función se encarga de dibujar las etiquetas para cada porción de la torta.
     Recibe un pincel(Turtle), el radio del circulo, los datos y un total"""
@@ -44,10 +42,10 @@ def dibujar_etiquetas(pincel, radio, datos):
     pincel.penup()
     pincel.sety(-radio_etiqueta)
 
-    for label, fraction in datos:
-        pincel.circle(radio_etiqueta, fraction * 360 / total / 2)
-        pincel.write(label, align="center", font=fuente)
-        pincel.circle(radio_etiqueta, fraction * 360 / total / 2)
+    for etiqueta, fraccion in datos:
+        pincel.circle(radio_etiqueta, fraccion * 360 / total / 2)
+        pincel.write(etiqueta, align="center", font=fuente)
+        pincel.circle(radio_etiqueta, fraccion * 360 / total / 2)
 
     screen = Screen()
     screen.exitonclick()
