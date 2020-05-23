@@ -1,91 +1,76 @@
 import turtle
 
-def dibujar_grafico_barras(datos, color="red"):
-    """Esta función se encarga de cargar los datos y llamar a la función configurar con los y el color de relleno.
-    Recibe una lista con los datos a graficar y un color de relleno, por defecto rojo"""
+def dibujar_grafico_barras(datos, etiquetas=[], color="red"):
+    """Esta función se encarga de cargar los datos y llamar a la función configurar con los datos y el color de relleno.
+    Recibe una lista con los datos a graficar, las etiquetas y un color de relleno, por defecto rojo"""
 
-    valores_x = []
     valores_y = []
     lista_de_datos = []
 
     exponente = obtener_exponente(datos)
+    longitud = (max(datos) // (10 ** exponente)) + 1
     
     #Modifico los datos recibidos para que se grafiquen correctamente
     for i in datos:
         lista_de_datos.append(i / (10 ** (exponente-2)))
 
-    longitud = obtener_maximo_eje_y(datos, exponente)
+    #Asigno etiquetas estandar cuando no se recibe ninguna
+    if(etiquetas == []):
+        for i in range(len(datos)):
+            etiquetas.append("Categoria " + str(i+1))
 
-    #Asigno los valores de los ejes
-    for i in range(len(datos)):
-        valores_x.append(str((i + 1) * (10)))
+    #Asigno los valores al eje y    
     for i in range(longitud):
         valores_y.append(str((i + 1) * (10 ** exponente)))
 
-    configurar(valores_x, valores_y, lista_de_datos, color)
+    configurar(etiquetas, valores_y, lista_de_datos, color)
     
 
 def obtener_exponente(datos):
-    maximo = max(datos)
+    """Esta funcion retorna la potencia a la que se eleva el maximo numero recibido en la lista de datos con base 10"""
+    maximo = max(datos) #Obtengo el maximo valor de la lista, llamada datos
     
-    valor = 0;
+    exponente = 0;
     while (maximo > 10):
-        valor += 1
+        exponente += 1
         maximo = maximo / 10
-    return valor
-
-
-def obtener_maximo_eje_y(datos, exponente):
-    longitud = len(datos)
-    cantidad = (max(datos) // (10 ** exponente))
-    
-    if(cantidad > longitud):
-        longitud = cantidad + 1
-
-    return longitud
+    return exponente
 
 
 def configurar(valores_x, valores_y, lista_de_datos, color):
     """Esta función configura las tortugas y luego dibuja. Recibe una lista con los valores del eje X, una lista con
     los valores del eje Y, y una lista con los valores de los datos a dibujar."""
 
-    turtle.setup(width=2000, height=2000)  #configura el ancho y largo de la ventana con valores porcentuales y lo posiciona.
+    turtle.setup(width=2000, height=2000)  #configura el ancho y largo de la ventana.
 
     # Definir pinceles
     tortuga_en_X = turtle.Pen()
     tortuga_en_Y = turtle.Pen()
     tortuga_graficar = turtle.Pen()
     tortuga_graficar_lineasPunteadas = turtle.Pen()
-    tortuga_etiqueta = turtle.Pen()
 
     #Aumentar velocidad de la tortuga
     tortuga_en_X.speed(0)
     tortuga_en_Y.speed(0)
-    tortuga_etiqueta.speed(0)
 
     # Ocultar tortuga
     tortuga_graficar.hideturtle()
     tortuga_graficar_lineasPunteadas.hideturtle()
-    tortuga_etiqueta.hideturtle()
 
     # Levantar pincel
     tortuga_en_X.up()
     tortuga_en_Y.up()
     tortuga_graficar.up()
     tortuga_graficar_lineasPunteadas.up()
-    tortuga_etiqueta.up()
 
     # Posicionar tortuga
-    tortuga_en_X.setpos(-250, -250)
-    tortuga_en_Y.setpos(-250, -250)
-    tortuga_graficar.setpos(-250, -250)
-    tortuga_graficar_lineasPunteadas.setpos(-250, -250)
+    tortuga_en_X.setpos(-500, -250)
+    tortuga_en_Y.setpos(-500, -250)
+    tortuga_graficar.setpos(-500, -250)
+    tortuga_graficar_lineasPunteadas.setpos(-500, -250)
 
     #Tamaño de la ventana
     turtle.screensize(2000, 2000)
-    
-    # Colocar etiquetas
-    etiquetas(tortuga_etiqueta)
 
     # Dibujar eje x
     eje_x(tortuga_en_X, valores_x)
@@ -98,25 +83,13 @@ def configurar(valores_x, valores_y, lista_de_datos, color):
     graficar(tortuga_graficar, lista_de_datos)
 
     # Graficar lineas punteadas
-    # graficar_lineas(tortuga_graficar_lineasPunteadas)
+    #graficar_lineas(tortuga_graficar_lineasPunteadas, valores_x, valores_y)
+    
     turtle.exitonclick()
-
-def etiquetas(tortuga_etiqueta):
-    """Esta función se encarga de escribir las etiquetas 'Eje x', y 'Eje y' en pantalla"""
-
-    margenXY = 30
-    tipografia = "Times New Roman"
-    nombre_eje_x = "Eje x"
-    nombre_eje_y = "Eje y"
-
-    tortuga_etiqueta.setpos(0, -250 + 20 - margenXY - 30)
-    tortuga_etiqueta.write(nombre_eje_x, False, align="center", font=(tipografia, 12, "normal"))
-    tortuga_etiqueta.setpos(-350, 250 + 60)
-    tortuga_etiqueta.write(nombre_eje_y, False, align="center", font=(tipografia, 12, "normal"))
 
 
 def eje_x(tortuga_en_X, valores_x):
-    """Esta función se encarga de graficar en pantalla la escala del eje x . Por defecto el largo es: 10"""
+    """Esta función se encarga de graficar en pantalla la escala del eje x."""
 
     tipografia = "Times New Roman"
     margenXY = 30
@@ -144,12 +117,9 @@ def eje_y(tortuga_en_Y, valores_y):
     margenXY = 30
 
     tortuga_en_Y.up()
-    tortuga_en_Y.setpos(-250 + posicion, -250 + posicion)
+    tortuga_en_Y.setpos(-500 + posicion, -250 + posicion)
     tortuga_en_Y.write("0", True, align="center", font=(tipografia, 10, "normal"))
-
-    #tortuga_en_Y.setpos(-480, -250) #si se quiere agregar solo al eje Y
-
-    tortuga_en_Y.setpos(-250, -250)
+    tortuga_en_Y.setpos(-500, -250)
     tortuga_en_Y.left(90)
     tortuga_en_Y.down()
 
@@ -189,11 +159,12 @@ def graficar(tortuga_graficar, lista_de_datos):
         tortuga_graficar.end_fill()
 
 
-def graficar_lineas(tortuga_graficar_lineasPunteadas):
-    for i in range(5):
+def graficar_lineas(tortuga_graficar_lineasPunteadas, valores_x, valores_y):
+    for i in range(len(valores_y)):
         tortuga_graficar_lineasPunteadas.setpos(-500, -250 + 100 * (i + 1))
 
-        for j in range(105):
+        #Dibujar las lineas punteadas
+        for j in range((len(valores_x)+1)*9):
             tortuga_graficar_lineasPunteadas.down()
             tortuga_graficar_lineasPunteadas.forward(5)
             tortuga_graficar_lineasPunteadas.up()
