@@ -22,7 +22,7 @@ def configurar(valores_x, valores_y, lista_de_datos, color):
     """Esta función configura las tortugas y luego dibuja. Recibe una lista con los valores del eje X, una lista con
     los valores del eje Y, y una lista con los valores de los datos a dibujar."""
 
-    turtle.setup(width=.5, height=.99, startx=None, starty=None)  # configura el ancho y largo de la ventana con valores porcentuales y lo posiciona.
+    turtle.setup(width=.5, height=.99, startx=0, starty=0)  #configura el ancho y largo de la ventana con valores porcentuales y lo posiciona.
 
     # Definir pinceles
     tortuga_en_X = turtle.Pen()
@@ -172,3 +172,6 @@ def graficar_lineas(tortuga_graficar_lineasPunteadas):
             tortuga_graficar_lineasPunteadas.forward(5)
             tortuga_graficar_lineasPunteadas.up()
             tortuga_graficar_lineasPunteadas.forward(5)
+
+
+dibujar_grafico_barras([10,20,30,40,50])
