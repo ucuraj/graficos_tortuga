@@ -3,25 +3,27 @@ import turtle
 def dibujar_grafico_barras(datos, color="red"):
     """Esta función se encarga de cargar los datos y llamar a la función configurar con los y el color de relleno.
     Recibe una lista con los datos a graficar y un color de relleno, por defecto rojo"""
+
     valores_x = []
     valores_y = []
     lista_de_datos = []
 
-    
     exponente = obtener_exponente(datos)
     
     #Modifico los datos recibidos para que se grafiquen correctamente
     for i in datos:
-        lista_de_datos.append(i / (10 ** (exponente -2)))
-        
+        lista_de_datos.append(i / (10 ** (exponente-2)))
+
+    longitud = obtener_maximo_eje_y(datos, exponente)
+
+    #Asigno los valores de los ejes
     for i in range(len(datos)):
         valores_x.append(str((i + 1) * (10)))
+    for i in range(longitud):
         valores_y.append(str((i + 1) * (10 ** exponente)))
 
-    ventana = turtle.Screen()
     configurar(valores_x, valores_y, lista_de_datos, color)
-    ventana.exitonclick()
-
+    
 
 def obtener_exponente(datos):
     maximo = max(datos)
@@ -32,11 +34,22 @@ def obtener_exponente(datos):
         maximo = maximo / 10
     return valor
 
+
+def obtener_maximo_eje_y(datos, exponente):
+    longitud = len(datos)
+    cantidad = (max(datos) // (10 ** exponente))
+    
+    if(cantidad > longitud):
+        longitud = cantidad + 1
+
+    return longitud
+
+
 def configurar(valores_x, valores_y, lista_de_datos, color):
     """Esta función configura las tortugas y luego dibuja. Recibe una lista con los valores del eje X, una lista con
     los valores del eje Y, y una lista con los valores de los datos a dibujar."""
 
-    turtle.setup(width=.5, height=.99, startx=0, starty=0)  #configura el ancho y largo de la ventana con valores porcentuales y lo posiciona.
+    turtle.setup(width=2000, height=2000)  #configura el ancho y largo de la ventana con valores porcentuales y lo posiciona.
 
     # Definir pinceles
     tortuga_en_X = turtle.Pen()
@@ -61,7 +74,6 @@ def configurar(valores_x, valores_y, lista_de_datos, color):
     tortuga_graficar.up()
     tortuga_graficar_lineasPunteadas.up()
     tortuga_etiqueta.up()
-    10
 
     # Posicionar tortuga
     tortuga_en_X.setpos(-250, -250)
@@ -69,6 +81,9 @@ def configurar(valores_x, valores_y, lista_de_datos, color):
     tortuga_graficar.setpos(-250, -250)
     tortuga_graficar_lineasPunteadas.setpos(-250, -250)
 
+    #Tamaño de la ventana
+    turtle.screensize(2000, 2000)
+    
     # Colocar etiquetas
     etiquetas(tortuga_etiqueta)
 
@@ -84,22 +99,19 @@ def configurar(valores_x, valores_y, lista_de_datos, color):
 
     # Graficar lineas punteadas
     # graficar_lineas(tortuga_graficar_lineasPunteadas)
-
+    turtle.exitonclick()
 
 def etiquetas(tortuga_etiqueta):
-    """Esta función se encarga de escribir las etiquetas 'Grafico de barras', 'Eje x', y 'Eje y' en pantalla"""
+    """Esta función se encarga de escribir las etiquetas 'Eje x', y 'Eje y' en pantalla"""
 
-    titulo = "Gráfico de barras"
     margenXY = 30
     tipografia = "Times New Roman"
     nombre_eje_x = "Eje x"
     nombre_eje_y = "Eje y"
 
-    tortuga_etiqueta.sety(-250 + 500 + 70)
-    tortuga_etiqueta.write(titulo, False, align="center", font=(tipografia, 25, "normal"))
-    tortuga_etiqueta.sety(-250 - 20 - margenXY - 30)
+    tortuga_etiqueta.setpos(0, -250 + 20 - margenXY - 30)
     tortuga_etiqueta.write(nombre_eje_x, False, align="center", font=(tipografia, 12, "normal"))
-    tortuga_etiqueta.setpos(-500, 250 + 60)
+    tortuga_etiqueta.setpos(-350, 250 + 60)
     tortuga_etiqueta.write(nombre_eje_y, False, align="center", font=(tipografia, 12, "normal"))
 
 
