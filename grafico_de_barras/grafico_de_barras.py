@@ -22,16 +22,18 @@ def configurar(valores_x, valores_y, lista_de_datos, color):
     """Esta función configura las tortugas y luego dibuja. Recibe una lista con los valores del eje X, una lista con
     los valores del eje Y, y una lista con los valores de los datos a dibujar."""
 
-    turtle.setup(width=.85, height=.75)  # configura el ancho y largo de la ventana con valores porcentuales.
+    turtle.setup(width=.5, height=.99, startx=None, starty=None)  # configura el ancho y largo de la ventana con valores porcentuales y lo posiciona.
 
     # Definir pinceles
     tortuga_en_X = turtle.Pen()
-    tortuga_en_X.speed(0)
     tortuga_en_Y = turtle.Pen()
-    tortuga_en_Y.speed(0)
     tortuga_graficar = turtle.Pen()
     tortuga_graficar_lineasPunteadas = turtle.Pen()
     tortuga_etiqueta = turtle.Pen()
+
+    #Aumentar velocidad de la tortuga
+    tortuga_en_X.speed(0)
+    tortuga_en_Y.speed(0)
     tortuga_etiqueta.speed(0)
 
     # Ocultar tortuga
@@ -48,10 +50,10 @@ def configurar(valores_x, valores_y, lista_de_datos, color):
     10
 
     # Posicionar tortuga
-    tortuga_en_X.setpos(-500, -250)
-    tortuga_en_Y.setpos(-500, -250)
-    tortuga_graficar.setpos(-500, -250)
-    tortuga_graficar_lineasPunteadas.setpos(-500, -250)
+    tortuga_en_X.setpos(-250, -250)
+    tortuga_en_Y.setpos(-250, -250)
+    tortuga_graficar.setpos(-250, -250)
+    tortuga_graficar_lineasPunteadas.setpos(-250, -250)
 
     # Colocar etiquetas
     etiquetas(tortuga_etiqueta)
@@ -116,12 +118,14 @@ def eje_y(tortuga_en_Y, valores_y):
     margenXY = 30
 
     tortuga_en_Y.up()
-    tortuga_en_Y.setpos(-500 + posicion, -300 + posicion)
-    tortuga_en_Y.write("0", True, align="center",
-                       font=(tipografia, 10, "normal"))  # Escribo 0 al principio de la escala de y.
-    tortuga_en_Y.setpos(-500, -300)
-    tortuga_en_Y.down()
+    tortuga_en_Y.setpos(-250 + posicion, -250 + posicion)
+    tortuga_en_Y.write("0", True, align="center", font=(tipografia, 10, "normal"))
+
+    #tortuga_en_Y.setpos(-480, -250) #si se quiere agregar solo al eje Y
+
+    tortuga_en_Y.setpos(-250, -250)
     tortuga_en_Y.left(90)
+    tortuga_en_Y.down()
 
     for valor_y in valores_y:
         tortuga_en_Y.forward(100)
@@ -148,11 +152,11 @@ def graficar(tortuga_graficar, lista_de_datos):
         tortuga_graficar.begin_fill()
         tortuga_graficar.left(90)
         tortuga_graficar.down()
-        tortuga_graficar.forward(int(dato) - 50)
+        tortuga_graficar.forward(int(dato))
         tortuga_graficar.right(90)
         tortuga_graficar.forward(ancho_barra)
         tortuga_graficar.right(90)
-        tortuga_graficar.forward(int(dato) - 50)
+        tortuga_graficar.forward(int(dato))
         tortuga_graficar.left(90)
         tortuga_graficar.up()
         tortuga_graficar.forward(100 - ancho_barra)
