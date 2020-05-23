@@ -8,7 +8,7 @@ def dibujar_torta(pincel, radio, datos):
 
     colores = cycle(
         ["#CB0C14", "#CB6F42", "#83A541", "#6CCB62", "#6596CB", "#815BCB", "#CB3EB7", "#2EC8CB",
-         "#2345CB"])
+         "#2345CB"]) #colores en rgb.
 
     pincel.pensize(3)
     pincel.pencolor("white")
@@ -18,7 +18,7 @@ def dibujar_torta(pincel, radio, datos):
 
     total = sum(fraccion for _, fraccion in datos)  # data doesn't sum to 100 so adjust
 
-    for _, fraction in datos:
+    for _, fraccion in datos:
         color = next(colores)
         pincel.fillcolor(color)
         pincel.begin_fill()
@@ -63,5 +63,5 @@ def dibujar(datos, radio=200):
     dibujar_etiquetas(pincel, radio, datos)
 
 
-porcentaje = [("Etiqueta A", 20), ("Etiqueta B", 200), ("Etiqueta C", 20), ("Etiqueta D", 20), ("Etiqueta E", 1)]
+porcentaje = [("Etiqueta A", 20), ("Etiqueta B", 60), ("Etiqueta C", 20), ("Etiqueta D", 40), ("Etiqueta E", 31.2)]
 dibujar(porcentaje)
