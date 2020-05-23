@@ -3,7 +3,8 @@ from itertools import cycle
 
 
 def dibujar_torta(pincel, radio, datos):
-    """Esta función se encarga de dibujar la torta. Recibe un pincel(Turtle), el radio del circulo y los datos a dibujar."""
+    """Esta función se encarga de dibujar la torta. Recibe un pincel(Turtle), el radio del circulo y
+    los datos a dibujar."""
 
     colores = cycle(
         ["#CB0C14", "#CB6F42", "#83A541", "#6CCB62", "#6596CB", "#815BCB", "#CB3EB7", "#2EC8CB",
