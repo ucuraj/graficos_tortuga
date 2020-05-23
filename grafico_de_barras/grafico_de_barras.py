@@ -1,9 +1,6 @@
 import turtle
 
-turtle.setup(width=.85, height=.75)  # configura el ancho y largo de la ventana con valores porcentuales.
-
-
-def cargar_datos_y_dibujar(datos, color="red"):
+def dibujar_grafico_barras(datos, color="red"):
     """Esta función se encarga de cargar los datos y llamar a la función configurar con los y el color de relleno.
     Recibe una lista con los datos a graficar y un color de relleno, por defecto rojo"""
     valores_x = []
@@ -16,12 +13,16 @@ def cargar_datos_y_dibujar(datos, color="red"):
     for i in datos:
         lista_de_datos.append(str(i * 10))
 
+    ventana = turtle.Screen()
     configurar(valores_x, valores_y, lista_de_datos, color)
+    ventana.exitonclick()
 
 
 def configurar(valores_x, valores_y, lista_de_datos, color):
     """Esta función configura las tortugas y luego dibuja. Recibe una lista con los valores del eje X, una lista con
     los valores del eje Y, y una lista con los valores de los datos a dibujar."""
+
+    turtle.setup(width=.85, height=.75)  # configura el ancho y largo de la ventana con valores porcentuales.
 
     # Definir pinceles
     tortuga_en_X = turtle.Pen()
@@ -157,9 +158,6 @@ def graficar(tortuga_graficar, lista_de_datos):
         tortuga_graficar.forward(100 - ancho_barra)
         tortuga_graficar.end_fill()
 
-    screen = turtle.Screen()
-    screen.exitonclick()
-
 
 def graficar_lineas(tortuga_graficar_lineasPunteadas):
     for i in range(5):
@@ -170,8 +168,3 @@ def graficar_lineas(tortuga_graficar_lineasPunteadas):
             tortuga_graficar_lineasPunteadas.forward(5)
             tortuga_graficar_lineasPunteadas.up()
             tortuga_graficar_lineasPunteadas.forward(5)
-
-
-t = turtle.Turtle()
-cargar_datos_y_dibujar([40, 30, 60, 20, 70], color="red")
-

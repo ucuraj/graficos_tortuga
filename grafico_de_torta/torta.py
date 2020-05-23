@@ -1,35 +1,37 @@
 from turtle import Turtle, Screen
 from itertools import cycle
+from random import shuffle
 
 
-def dibujar_torta(pincel, radio, datos):
+def _dibujar_torta(pincel, radio, datos):
     """Esta función se encarga de dibujar la torta. Recibe un pincel(Turtle), el radio del circulo y
     los datos a dibujar."""
 
-    colores = cycle(
-        ["#CB0C14", "#CB6F42", "#83A541", "#6CCB62", "#6596CB", "#815BCB", "#CB3EB7", "#2EC8CB",
-         "#2345CB"]) #colores en rgb.
+    colores = ["#8251FA", "#FA60C8", "#FA5262", "#FAA039", "#FAF40C", "#A4FA72", "#74FABC", "#77B8FA", "#4F5EFA",
+               "#FA1D38"]
 
-    pincel.pensize(3)
-    pincel.pencolor("white")
+    shuffle(colores)
+    ciclo_colores = cycle(colores)  # colores en rgb.
+
     pincel.penup()
     pincel.sety(-radio)
     pincel.pendown()
 
     total = sum(fraccion for _, fraccion in datos)  # data doesn't sum to 100 so adjust
 
-    for _, fraccion in datos:
-        color = next(colores)
+    for _, fraccion in datos:  # _, ignora etiqueta al desempaquetar los datos de la tupla.
+        color = next(ciclo_colores)
+        pincel.pencolor(color)
         pincel.fillcolor(color)
         pincel.begin_fill()
-        pincel.circle(radio, fraction * 360 / total)
+        pincel.circle(radio, fraccion * 360 / total)
         posicion = pincel.position()
         pincel.goto(0, 0)
         pincel.end_fill()
         pincel.setposition(posicion)
 
 
-def dibujar_etiquetas(pincel, radio, datos):
+def _dibujar_etiquetas(pincel, radio, datos):
     """Esta función se encarga de dibujar las etiquetas para cada porción de la torta.
     Recibe un pincel(Turtle), el radio del circulo, los datos y un total"""
 
@@ -47,21 +49,14 @@ def dibujar_etiquetas(pincel, radio, datos):
         pincel.write(etiqueta, align="center", font=fuente)
         pincel.circle(radio_etiqueta, fraccion * 360 / total / 2)
 
-    screen = Screen()
-    screen.exitonclick()
 
-
-def dibujar(datos, radio=200):
+def dibujar_grafico_torta(datos, radio=200):
     """Esta función recibe en datos una lista de tuplas, donde cada tupla tiene una etiquta y un valor a graficar en
      la torta. El radio por defecto es 200"""
-
     pincel = Turtle()
     pincel.speed(10)
-
-    dibujar_torta(pincel, radio, datos)
+    ventana = Screen()
+    _dibujar_torta(pincel, radio, datos)
     pincel.pencolor("black")
-    dibujar_etiquetas(pincel, radio, datos)
-
-
-porcentaje = [("Etiqueta A", 20), ("Etiqueta B", 60), ("Etiqueta C", 20), ("Etiqueta D", 40), ("Etiqueta E", 31.2)]
-dibujar(porcentaje)
+    _dibujar_etiquetas(pincel, radio, datos)
+    ventana.exitonclick()
