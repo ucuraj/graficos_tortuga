@@ -17,19 +17,19 @@ Las funciones principales que se deben invocar son:
 - dibujar_grafico_barras
 - dibujar_grafico_torta
 
-# Uso de las funciones de Graficos
+# Uso de las funciones de Gráficos
 
 - ## dibujar_grafico_barras
 
 Esta función recibe 4 tipos de parámetros:
-datos = una lista de enteros indicando el valor de cada barra
-etiquetas = una lista de strings indicando el nombre de cada barra
-color = un string indicando el color de las barras (opcional, por defecto es "red")
-tiempo = un entero indicando el tiempo de visualizacion (opcional, por defecto es 3)
+- datos = una lista de enteros indicando el valor de cada barra.
+- etiquetas = una lista de strings indicando el nombre de cada barra.
+- color = un string indicando el color de las barras (opcional, por defecto es "red")
+- tiempo = un entero indicando el tiempo de visualizacion (opcional, por defecto es 3)
 
-Se debe tener en cuenta que tanto los datos como las etiquetas deben ser compatibles en cantidad, es decir, si se ingresan mayor cantidad de datos que de etiquetas o viceversa, el programa finalizará con código de error 1 imposibilitando su visualización.
+Se debe tener en cuenta que tanto los datos como las etiquetas deben ser compatibles en cantidad, es decir, si se ingresa mayor cantidad de datos que de etiquetas o viceversa, el programa finalizará con código de error 1 imposibilitando su visualización.
 
-- ### Representación de valores de entrada e invocacion válidos 
+### Representación de valores de entrada e invocación válidos 
 ```
 datos = [20,30,40,50,60]
 etiquetas = ["A1","B2","C3","D4","E5"]
@@ -48,11 +48,11 @@ Para saber mas sobre la gamma de colores que se pueden utilizar [ingresar aqui](
 - ## dibujar_grafico_torta
 
 Esta función recibe 3 tipos de parámetros:
-datos = una lista de tuplas que contiene 2 valores cada una (string y entero) indicando la porcion a graficar
-radio = un entero indicando el tamaño del radio de la circunferencia a representar
-tiempo = un entero indicando el tiempo de visualizacion en segundos
+- datos = una lista de tuplas que contiene 2 valores cada una (string y entero) indicando la porcion a graficar.
+- radio = un entero indicando el tamaño del radio de la circunferencia a representar.
+- tiempo = un entero indicando el tiempo de visualizacion en segundos.
 
-- ### Representación de valores de entrada e invocacion válidos 
+### Representación de valores de entrada e invocación válidos
 ```
 datos = [("Etiqueta A", 30), ("Etiqueta B", 15), ("Etiqueta C", 40), ("Etiqueta D", 10), ("Etiqueta E", 20)]
 radio = 150
@@ -61,7 +61,7 @@ tiempo = 5
 dibujar_grafico_torta(datos,radio,tiempo)
 
 ```
-Por defecto los parametros de radio y tiempo se establecen en 200 y 3 respectivamente. De este modo, dichos parámetros se vuelven opcionales, haciendo válida la invocación de la función obviando dichos valores:
+Por defecto los parámetros de radio y tiempo se establecen en 200 y 3 respectivamente. De este modo, dichos parámetros se vuelven opcionales, haciendo válida la invocación de la función obviando dichos valores:
 dibujar_grafico_torta(datos)
 
 
