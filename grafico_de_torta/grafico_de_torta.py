@@ -1,7 +1,10 @@
 from turtle import Turtle, Screen
+import turtle
 from itertools import cycle
 from random import shuffle
-
+import tkinter
+import time
+turtle.clearscreen()
 
 def _dibujar_torta(pincel, radio, datos):
     """Esta función se encarga de dibujar la torta. Recibe un pincel(Turtle), el radio del circulo y
@@ -50,13 +53,28 @@ def _dibujar_etiquetas(pincel, radio, datos):
         pincel.circle(radio_etiqueta, fraccion * 360 / total / 2)
 
 
-def dibujar_grafico_torta(datos, radio=200):
+def dibujar_grafico_torta(datos, radio=200,tiempo=3):
     """Esta función recibe en datos una lista de tuplas, donde cada tupla tiene una etiquta y un valor a graficar en
-     la torta. El radio por defecto es 200"""
+     la torta. El radio por defecto es 200
+     Los parametros tienen que respetar una estructura como la siguiente:
+     datos = (lista) [("A",50),("B",23),("C",231),("D",4),("E",5)]
+     radio = (entero) 1,2,3,4..N  -->corresponde al radio de la circunferencia del grafico
+     tiempo =  (entero) 1,2,3,4,5..N --> referencia el tiempo en segundos en el cual va a tardar en mostrar el grafico antes de poder eliminarlo
+     Para usar la función se debe invocarla en el programa principal con los datos y el radio deseado
+     
+     Ejemplo de ejecucion:
+
+     dibujar_grafico_torta([("A",50),("B",23),("C",231),("D",4),("E",5)],150)
+     """
+
+    turtle.clearscreen()
+
     pincel = Turtle()
     pincel.speed(10)
     ventana = Screen()
     _dibujar_torta(pincel, radio, datos)
     pincel.pencolor("black")
     _dibujar_etiquetas(pincel, radio, datos)
-    ventana.exitonclick()
+    #ventana.exitonclick()
+    tkinter.mainloop(30000000)
+    time.sleep(tiempo)

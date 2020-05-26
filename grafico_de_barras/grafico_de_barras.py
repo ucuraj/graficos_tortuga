@@ -1,9 +1,45 @@
 import turtle
+import tkinter
+import time
 
-def dibujar_grafico_barras(datos, etiquetas=[], color="red"):
+initPosX,initPosY= -300,-250
+turtle.clearscreen()
+
+def dibujar_grafico_barras(datos=[], etiquetas=[], color="red",tiempo=3):
     """Esta función se encarga de cargar los datos y llamar a la función configurar con los datos y el color de relleno.
-    Recibe una lista con los datos a graficar, las etiquetas y un color de relleno, por defecto rojo"""
+    Recibe una lista con los datos a graficar, las etiquetas y un color de relleno, por defecto rojo
+    Los parametros tienen que respetar una estructura como la siguiente:
+    
+    datos = (lista de enteros) [20,20,20,20,20]
+    etiqueta = (lista de cadena de caracteres) ["A","B","C","D","E"]
+    color = (cadena de caracteres) = "red" , "green", "yellow", "black", "blue", etc
+    para mas informacion sobre todos los colores puede visitar el siguiente link:
+    (http://www.science.smith.edu/dftwiki/index.php/Color_Charts_for_TKinter)
+    tiempo = (entero) 1,2,3,4,5 ... N -> representa el tiempo el cual se va a visualizar el grafico antes que pueda eliminarse
 
+    Ejemplo de uso:
+
+    Se tiene que llamar a la funcion con una seleccion de parametros como la siguiente
+     
+    *solo mandando los valores de los graficos
+    dibujar_graficos_barras([20,20,20,20,20])
+    
+    *mandando los graficos y la etiquetas
+    dibujar_graficos_barras([20,20,20,20,20],["A","B","C","D","E"])
+
+    *incorporando un color diferente al rojo
+    dibujar_graficos_barras([20,20,20,20,20],["A","B","C","D","E"],"green")
+    """
+
+    if len(datos)!=len(etiquetas):
+        print("¡¡¡¡¡¡¡ERROR!!!!!!")
+        print("""Se ingresaron cantidades diferentes entre los datos y las etiquetas en los parametros del Grafico
+          de Barras,por favor revise nuevamente que la cantidad de datos coincida""")
+        exit(1)
+
+    turtle.clearscreen()
+
+    turtle.Screen().clear()
     valores_y = []
     lista_de_datos = []
 
@@ -23,7 +59,7 @@ def dibujar_grafico_barras(datos, etiquetas=[], color="red"):
     for i in range(longitud):
         valores_y.append(str((i + 1) * (10 ** exponente)))
 
-    configurar(etiquetas, valores_y, lista_de_datos, color)
+    configurar(etiquetas, valores_y, lista_de_datos, color,tiempo)
     
 
 def obtener_exponente(datos):
@@ -37,11 +73,13 @@ def obtener_exponente(datos):
     return exponente
 
 
-def configurar(valores_x, valores_y, lista_de_datos, color):
+def configurar(valores_x, valores_y, lista_de_datos, color,tiempo=3):
     """Esta función configura las tortugas y luego dibuja. Recibe una lista con los valores del eje X, una lista con
     los valores del eje Y, y una lista con los valores de los datos a dibujar."""
 
-    turtle.setup(width=2000, height=2000)  #configura el ancho y largo de la ventana.
+
+    turtle.setup(width=.75, height=.85)  #configura el ancho y largo de la ventana.
+    screen = turtle.Screen()
 
     # Definir pinceles
     tortuga_en_X = turtle.Pen()
@@ -64,13 +102,12 @@ def configurar(valores_x, valores_y, lista_de_datos, color):
     tortuga_graficar_lineasPunteadas.up()
 
     # Posicionar tortuga
-    tortuga_en_X.setpos(-500, -250)
-    tortuga_en_Y.setpos(-500, -250)
-    tortuga_graficar.setpos(-500, -250)
-    tortuga_graficar_lineasPunteadas.setpos(-500, -250)
-
-    #Tamaño de la ventana
-    turtle.screensize(2000, 2000)
+    global initPosX 
+    initPosX -= 20*len(lista_de_datos)
+    tortuga_en_X.setpos(initPosX, initPosY)
+    tortuga_en_Y.setpos(initPosX, initPosY)
+    tortuga_graficar.setpos(initPosX, initPosY)
+    tortuga_graficar_lineasPunteadas.setpos(initPosX, initPosY)
 
     # Dibujar eje x
     eje_x(tortuga_en_X, valores_x)
@@ -85,7 +122,8 @@ def configurar(valores_x, valores_y, lista_de_datos, color):
     # Graficar lineas punteadas
     #graficar_lineas(tortuga_graficar_lineasPunteadas, valores_x, valores_y)
     
-    turtle.exitonclick()
+    tkinter.mainloop(30000000)
+    time.sleep(tiempo)
 
 
 def eje_x(tortuga_en_X, valores_x):
@@ -117,9 +155,9 @@ def eje_y(tortuga_en_Y, valores_y):
     margenXY = 30
 
     tortuga_en_Y.up()
-    tortuga_en_Y.setpos(-500 + posicion, -250 + posicion)
+    tortuga_en_Y.setpos(initPosX + posicion, initPosY + posicion)
     tortuga_en_Y.write("0", True, align="center", font=(tipografia, 10, "normal"))
-    tortuga_en_Y.setpos(-500, -250)
+    tortuga_en_Y.setpos(initPosX, initPosY)
     tortuga_en_Y.left(90)
     tortuga_en_Y.down()
 
@@ -169,4 +207,3 @@ def graficar_lineas(tortuga_graficar_lineasPunteadas, valores_x, valores_y):
             tortuga_graficar_lineasPunteadas.forward(5)
             tortuga_graficar_lineasPunteadas.up()
             tortuga_graficar_lineasPunteadas.forward(5)
-
