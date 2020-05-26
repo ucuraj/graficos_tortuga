@@ -62,4 +62,4 @@ dibujar_grafico_torta(datos,radio,tiempo)
 por defecto los parametros de radio y tiempo se establecen en 200 y 3 respectivamente
 
 
-Puede encontrar un ejemplo de ejecucion de ambos graficos en el archivo ejemplo.py
+Puede encontrar un ejemplo de ejecucion de ambos graficos en el archivo [ejemplo.py](https://github.com/ucuraj/graficos_tortuga/blob/master/ejemplo.py)
