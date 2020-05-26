@@ -1,18 +1,25 @@
+from turtle import Turtle, Screen
 import turtle
 import tkinter
 import time
 
-initPosX,initPosY= -300,-250
-turtle.clearscreen()
+"""Variable global = Visible/utilizable desde cualquier ambito del programa.
+Si no se especifica como global se la considera local.
+Variable local = Visible/Utilizable solo en el bloque donde se crea
+"""
+initPosX, initPosY= -150,-200 #Variables globales
+base = 10 #Variable global
+turtle.clearscreen() #Variable global
 
-def dibujar_grafico_barras(datos=[], etiquetas=[], color="red",tiempo=3):
+
+def dibujar_grafico_barras(datos=[], etiquetas=[], color="red", tiempo=3):
     """Esta función se encarga de cargar los datos y llamar a la función configurar con los datos y el color de relleno.
     Recibe una lista con los datos a graficar, las etiquetas y un color de relleno, por defecto rojo
     Los parametros tienen que respetar una estructura como la siguiente:
     
     datos = (lista de enteros) [20,20,20,20,20]
-    etiqueta = (lista de cadena de caracteres) ["A","B","C","D","E"]
-    color = (cadena de caracteres) = "red" , "green", "yellow", "black", "blue", etc
+    etiqueta = (lista de cadena de caracteres = lista de String) ["A1","B2","C3","D4","E5"]
+    color = (cadena de caracteres = String) = "red" , "green", "yellow", "black", "blue", etc
     para mas informacion sobre todos los colores puede visitar el siguiente link:
     (http://www.science.smith.edu/dftwiki/index.php/Color_Charts_for_TKinter)
     tiempo = (entero) 1,2,3,4,5 ... N -> representa el tiempo el cual se va a visualizar el grafico antes que pueda eliminarse
@@ -44,11 +51,11 @@ def dibujar_grafico_barras(datos=[], etiquetas=[], color="red",tiempo=3):
     lista_de_datos = []
 
     exponente = obtener_exponente(datos)
-    longitud = (max(datos) // (10 ** exponente)) + 1
+    longitud = (max(datos) // (base ** exponente)) + 1
     
     #Modifico los datos recibidos para que se grafiquen correctamente
     for i in datos:
-        lista_de_datos.append(i / (10 ** (exponente-2)))
+        lista_de_datos.append(i / (base ** (exponente-2)))
 
     #Asigno etiquetas estandar cuando no se recibe ninguna
     if(etiquetas == []):
@@ -66,10 +73,10 @@ def obtener_exponente(datos):
     """Esta funcion retorna la potencia a la que se eleva el maximo numero recibido en la lista de datos con base 10"""
     maximo = max(datos) #Obtengo el maximo valor de la lista, llamada datos
     
-    exponente = 0;
-    while (maximo > 10):
+    exponente = 0
+    while (maximo > base):
         exponente += 1
-        maximo = maximo / 10
+        maximo = maximo / base
     return exponente
 
 
@@ -77,9 +84,10 @@ def configurar(valores_x, valores_y, lista_de_datos, color,tiempo=3):
     """Esta función configura las tortugas y luego dibuja. Recibe una lista con los valores del eje X, una lista con
     los valores del eje Y, y una lista con los valores de los datos a dibujar."""
 
-
-    turtle.setup(width=.75, height=.85)  #configura el ancho y largo de la ventana.
-    screen = turtle.Screen()
+    # Defino la pantalla para que sea scrollable
+    screen = Screen()
+    width, height = screen.screensize()
+    screen.screensize(width * base, height * base)
 
     # Definir pinceles
     tortuga_en_X = turtle.Pen()
@@ -90,6 +98,7 @@ def configurar(valores_x, valores_y, lista_de_datos, color,tiempo=3):
     #Aumentar velocidad de la tortuga
     tortuga_en_X.speed(0)
     tortuga_en_Y.speed(0)
+    tortuga_graficar_lineasPunteadas.speed(0)
 
     # Ocultar tortuga
     tortuga_graficar.hideturtle()
@@ -102,7 +111,11 @@ def configurar(valores_x, valores_y, lista_de_datos, color,tiempo=3):
     tortuga_graficar_lineasPunteadas.up()
 
     # Posicionar tortuga
-    global initPosX 
+    global initPosX     
+    """Variable global = Visible/utilizable desde cualquier ambito del programa.
+     Si no se especifica como global se la considera local.
+     Variable local = Visible/Utilizable solo en el bloque donde se crea
+    """
     initPosX -= 20*len(lista_de_datos)
     tortuga_en_X.setpos(initPosX, initPosY)
     tortuga_en_Y.setpos(initPosX, initPosY)
@@ -116,11 +129,11 @@ def configurar(valores_x, valores_y, lista_de_datos, color,tiempo=3):
     eje_y(tortuga_en_Y, valores_y)
 
     # Graficar barras
-    tortuga_graficar.color(color)  # indico el color con el que quiero graficar
+    tortuga_graficar.color(color)  # Asigno el color con el que quiero graficar
     graficar(tortuga_graficar, lista_de_datos)
 
     # Graficar lineas punteadas
-    #graficar_lineas(tortuga_graficar_lineasPunteadas, valores_x, valores_y)
+    graficar_lineas(tortuga_graficar_lineasPunteadas, valores_x, valores_y)
     
     tkinter.mainloop(30000000)
     time.sleep(tiempo)
@@ -199,7 +212,7 @@ def graficar(tortuga_graficar, lista_de_datos):
 
 def graficar_lineas(tortuga_graficar_lineasPunteadas, valores_x, valores_y):
     for i in range(len(valores_y)):
-        tortuga_graficar_lineasPunteadas.setpos(-500, -250 + 100 * (i + 1))
+        tortuga_graficar_lineasPunteadas.setpos(initPosX, initPosY + 100 * (i + 1))
 
         #Dibujar las lineas punteadas
         for j in range((len(valores_x)+1)*9):

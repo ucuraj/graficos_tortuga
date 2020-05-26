@@ -57,7 +57,7 @@ def dibujar_grafico_torta(datos, radio=200,tiempo=3):
     """Esta función recibe en datos una lista de tuplas, donde cada tupla tiene una etiquta y un valor a graficar en
      la torta. El radio por defecto es 200
      Los parametros tienen que respetar una estructura como la siguiente:
-     datos = (lista) [("A",50),("B",23),("C",231),("D",4),("E",5)]
+     datos = (lista de tuplas) [("A",50),("B",23),("C",231),("D",4),("E",5)]
      radio = (entero) 1,2,3,4..N  -->corresponde al radio de la circunferencia del grafico
      tiempo =  (entero) 1,2,3,4,5..N --> referencia el tiempo en segundos en el cual va a tardar en mostrar el grafico antes de poder eliminarlo
      Para usar la función se debe invocarla en el programa principal con los datos y el radio deseado
