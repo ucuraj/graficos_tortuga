@@ -14,7 +14,7 @@ def _dibujar_torta(pincel, radio, datos):
                "#FA1D38"]
 
     shuffle(colores)
-    ciclo_colores = cycle(colores)  # colores en rgb.
+    ciclo_colores = cycle(colores)  # colores en hex
 
     pincel.penup()
     pincel.sety(-radio)
