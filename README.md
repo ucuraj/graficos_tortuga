@@ -28,8 +28,8 @@ Esta función recibe 4 parámetros:
 
 Tener en cuenta que la cantidad de elementos de la lista datos debe ser igual al de la lista etiquetas, en caso contrario el programa finalizará con código de error 1, y por lo tanto no será posible visualizar el gráfico.
 
-###Posibles formas de invocación de la función dibujar_grafico_barra
-###Forma 1: Pasando todos los parámetros
+#### Posibles formas de invocación de la función dibujar_grafico_barra
+##### Forma 1: Pasando todos los parámetros
 ```python
 datos = [20,30,40,50,60]
 etiquetas = ["A1","B2","C3","D4","E5"]
@@ -39,12 +39,12 @@ tiempo = 5
 dibujar_grafico_barra(datos,etiquetas,color,tiempo)
 ```
 
-###Forma 2: Pasando solamente el parámetro obligatorio
+##### Forma 2: Pasando solamente el parámetro obligatorio
 Por defecto los parámetros etiquetas, color y tiempo se establecen en `["Categoría 1",  "Categoría 2", …, "Categoría N"] #siendo N la longitud de la lista datos`, `"red"` y `3` respectivamente. Son parámetros opcionales y pueden no estar presentes en la invocación:
 
 `dibujar_grafico_barra(datos)`
 
-#
+# 
 ### dibujar_grafico_torta
 
 Esta función recibe 3 parámetros:
@@ -52,8 +52,8 @@ Esta función recibe 3 parámetros:
 - **radio**: un *entero* que representa el tamaño del radio de la circunferencia. Si no se indica un valor de radio, por defecto es 200.
 - **tiempo**: un *entero* un entero que representa el tiempo de visualización en segundos. Si no se indica un tiempo, por defecto es 3.
 
-###Posibles formas de invocación de la función dibujar_grafico_torta
-###Forma 1: Pasando todos los parámetros
+#### Posibles formas de invocación de la función dibujar_grafico_torta
+##### Forma 1: Pasando todos los parámetros
 
 ```python
 datos = [("Etiqueta A", 30), ("Etiqueta B", 15), ("Etiqueta C", 40), ("Etiqueta D", 10), ("Etiqueta E", 20)]
@@ -63,7 +63,7 @@ tiempo = 5
 dibujar_grafico_torta(datos,radio,tiempo)
 ```
 
-###Forma 2: Pasando solamente el parámetro obligatorio
+##### Forma 2: Pasando solamente el parámetro obligatorio
 Por defecto los parámetros `radio` y `tiempo` se establecen en *200* y *3* respectivamente. Son parámetros opcionales y pueden no estar presentes en la invocación:
 
 `dibujar_grafico_torta(datos)`
