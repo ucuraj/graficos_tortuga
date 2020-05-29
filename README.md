@@ -1,36 +1,36 @@
 # Gráficos en Python  
-Se presenta un modulo desarrollado en Python para realizar gráficos de barras, así como también gráficos de torta.
-La implementación se realiza utilizando el modulo Turtle disponible en Python, con programación procedural.
+Estos módulos permiten crear gráficos de barras y de torta usando el módulo turtle de Python.
 
-Las funciones que permiten realizar los gráficos se encuentran en sus respectivas carpetas, donde cada uno contiene un archivo con el mismo nombre del directorio:
-- grafico_de_barras
-- grafico_de_tortas
+Las funciones que permiten crear los gráficos se encuentran en los archivos:- grafico_de_barras
+- [grafico_de_barras.py](https://github.com/ucuraj/graficos_tortuga/blob/master/grafico_de_barras/grafico_de_barras.py)
+- [grafico_de_tortas.py](https://github.com/ucuraj/graficos_tortuga/blob/master/grafico_de_torta/grafico_de_torta.py)
 
-Para poder utilizarlo se deben importar los archivos correspondientes a los graficos que deseamos representar. 
-La importación desde un archivo que se aloje fuera del directorio donde se encuentre el programa que realiza el gráfico, debe respetar la siguiente sintáxis:
-directorio.archivo 
+Para poder utilizarlo en su programa debe importar el módulo correspondiente al tipo que gráfico que quiera utilizar:
 
-Tener en cuenta que si se ejecuta desde un directorio externo se debe colocar todo el path del archivo:
-directorio.directorio.(...).archivo
+import grafico_de_barras
+import grafico_de_tortas
 
 Las funciones principales que se deben invocar son:
+
 - dibujar_grafico_barras
 - dibujar_grafico_torta
 
-# Uso de las funciones de Gráficos
+## Uso de las funciones de Gráficos
 
-- ## dibujar_grafico_barras
+### dibujar_grafico_barras
 
-Esta función recibe 4 tipos de parámetros:
-- datos = una lista de enteros indicando el valor de cada barra.
-- etiquetas = una lista de strings indicando el nombre de cada barra.
-- color = un string indicando el color de las barras (opcional, por defecto es "red")
-- tiempo = un entero indicando el tiempo de visualizacion (opcional, por defecto es 3)
+Esta función recibe 4 parámetros:
+- **datos**: *una lista de enteros* indicando el valor de cada barra.
+- **etiquetas** *(opcional)*: una *lista de strings* que representa el nombre de la etiqueta de cada barra. Si el parámetro no se encuentra, por defecto las etiquetas toman los siguientes valores: "Categoría 1",  "Categoría 2", …, "Categoría N". Siendo N la longitud de la lista datos.
+- **color**: un *string* que representa el color de las barras. Si no se indica un color,  por defecto es "red". Los posibles colores se pueden consultar [ingresando aquí](http://www.science.smith.edu/dftwiki/index.php/Color_Charts_for_TKinter).
+- **tiempo** *(opcional): un entero* que representa el tiempo de visualización en segundos. Si no se indica un tiempo, por defecto es 3.
 
-Se debe tener en cuenta que tanto los datos como las etiquetas deben ser compatibles en cantidad, es decir, si se ingresa mayor cantidad de datos que de etiquetas o viceversa, el programa finalizará con código de error 1 imposibilitando su visualización.
 
-### Representación de valores de entrada e invocación válidos 
-```
+Tener en cuenta que la cantidad de elementos de la lista datos debe ser igual al de la lista etiquetas, en caso contrario el programa finalizará con código de error 1, y por lo tanto no será posible visualizar el gráfico.
+
+####Posibles formas de invocación de la función dibujar_grafico_barra
+#####Forma 1: Pasando todos los parámetros
+```python
 datos = [20,30,40,50,60]
 etiquetas = ["A1","B2","C3","D4","E5"]
 color = "blue"
@@ -38,32 +38,34 @@ tiempo = 5
 
 dibujar_grafico_barra(datos,etiquetas,color,tiempo)
 ```
-Por defecto los parámetros de etiquetas, color y tiempo se establecen en "Categoria n" (siendo n=1..longitud de la lista llamada datos), "red" y 3 respectivamente. De este modo, dichos parámetros se vuelven opcionales, haciendo válida la invocación de la función obviando dichos valores:
 
-dibujar_grafico_barra(datos)
-  
-Para saber mas sobre la gamma de colores que se pueden utilizar [ingresar aqui](http://www.science.smith.edu/dftwiki/index.php/Color_Charts_for_TKinter)
+#####Forma 2: Pasando solamente el parámetro obligatorio
+Por defecto los parámetros etiquetas, color y tiempo se establecen en `["Categoría 1",  "Categoría 2", …, "Categoría N"] #siendo N la longitud de la lista datos`, `"red"` y `3` respectivamente. Son parámetros opcionales y pueden no estar presentes en la invocación:
 
+`dibujar_grafico_barra(datos)`
 
-- ## dibujar_grafico_torta
+#
+### dibujar_grafico_torta
 
-Esta función recibe 3 tipos de parámetros:
-- datos = una lista de tuplas que contiene 2 valores cada una (string y entero) indicando la porcion a graficar.
-- radio = un entero indicando el tamaño del radio de la circunferencia a representar.
-- tiempo = un entero indicando el tiempo de visualizacion en segundos.
+Esta función recibe 3 parámetros:
+- **datos**: una *lista de tuplas*. Cada tupla contiene los datos de una porción del gráfico de torta, y se compone de dos valores;  un string que representa el nombre de la etiqueta y un entero que es su valor asociado.
+- **radio**: un *entero* que representa el tamaño del radio de la circunferencia. Si no se indica un valor de radio, por defecto es 200.
+- **tiempo**: un *entero* un entero que representa el tiempo de visualización en segundos. Si no se indica un tiempo, por defecto es 3.
 
-### Representación de valores de entrada e invocación válidos
-```
+####Posibles formas de invocación de la función dibujar_grafico_torta
+#####Forma 1: Pasando todos los parámetros
+
+```python
 datos = [("Etiqueta A", 30), ("Etiqueta B", 15), ("Etiqueta C", 40), ("Etiqueta D", 10), ("Etiqueta E", 20)]
 radio = 150
 tiempo = 5
-
+ 
 dibujar_grafico_torta(datos,radio,tiempo)
-
 ```
-Por defecto los parámetros de radio y tiempo se establecen en 200 y 3 respectivamente. De este modo, dichos parámetros se vuelven opcionales, haciendo válida la invocación de la función obviando dichos valores:
-dibujar_grafico_torta(datos)
 
+#####Forma 2: Pasando solamente el parámetro obligatorio
+Por defecto los parámetros `radio` y `tiempo` se establecen en *200* y *3* respectivamente. Son parámetros opcionales y pueden no estar presentes en la invocación:
 
+`dibujar_grafico_torta(datos)`
 
 Puede encontrar un ejemplo de ejecucion de ambos graficos en el archivo [ejemplo.py](https://github.com/ucuraj/graficos_tortuga/blob/master/ejemplo.py)
