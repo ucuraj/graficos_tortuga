@@ -1,7 +1,7 @@
 # Gráficos en Python  
 Estos módulos permiten crear gráficos de barras y de torta usando el módulo turtle de Python.
 
-Las funciones que permiten crear los gráficos se encuentran en los archivos:- grafico_de_barras
+Las funciones que permiten crear los gráficos se encuentran en los archivos:
 - [grafico_de_barras.py](https://github.com/ucuraj/graficos_tortuga/blob/master/grafico_de_barras/grafico_de_barras.py)
 - [grafico_de_tortas.py](https://github.com/ucuraj/graficos_tortuga/blob/master/grafico_de_torta/grafico_de_torta.py)
 
