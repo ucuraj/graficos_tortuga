@@ -12,8 +12,8 @@ import grafico_de_tortas
 
 Las funciones principales que se deben invocar son:
 
-- dibujar_grafico_barras
-- dibujar_grafico_torta
+- **dibujar_grafico_barras**
+- **dibujar_grafico_torta**
 
 ## Uso de las funciones de Gráficos
 
